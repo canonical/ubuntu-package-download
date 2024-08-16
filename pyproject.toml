@@ -1,55 +1,49 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
-[project]
+[tool.poetry]
 name = "ubuntu_package_download"
 version = "0.0.6"
 description = "Helpful utility to download Ubuntu debian packages"
-readme = "README.rst"
+license = "GPL-3.0-only"
 authors = [
-  {name = "Philip Roche", email = "phil.roche@canonical.com"}
+  "Philip Roche <phil.roche@canonical.com>",
 ]
 maintainers = [
-  {name = "Philip Roche", email = "phil.roche@canonical.com"}
+  "Philip Roche <phil.roche@canonical.com>",
 ]
-classifiers = [
-
-]
-license = {text = "GNU General Public License v3"}
-dependencies = [
-    "typer",
-    "launchpadlib",
-    "python-debian",
-    "rich",
-    "typing-extensions",
+readme = "README.rst"
+packages = [
+  { include = "ubuntu_package_download", from = "src" }
 ]
 
-[project.optional-dependencies]
-dev = [
-    "coverage",  # testing
-    "mypy",  # linting
-    "pytest",  # testing
-    "ruff"  # linting
-]
+[tool.poetry.dependencies]
+python = "^3.10"
+typer = "^0.12.4"
+launchpadlib = "^2.0.0"
+python-debian = "^0.1.49"
+rich = "^13.7.1"
 
-[project.urls]
+[tool.poetry.group.dev.dependencies]
+sphinx = "^8.0.2"
+bump2version = "^1.0.1"
+coverage = "^7.6.1"
+mypy = "^1.11.1"
+pytest = "^8.3.2"
+ruff = "^0.6.1"
+tox = "^4.18.0"
+twine = "^5.1.1"
+watchdog = "^4.0.2"
 
-bugs = "https://github.com/philroche/ubuntu_package_download/issues"
-changelog = "https://github.com/philroche/ubuntu_package_download/blob/master/changelog.md"
-homepage = "https://github.com/philroche/ubuntu_package_download"
-
-[project.scripts]
+[tool.poetry.scripts]
 ubuntu-package-download = "ubuntu_package_download.cli:app"
 
-[tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.package-data]
-"*" = ["*.*"]
-
-
-
+[tool.poetry.urls]
+homepage = "https://github.com/philroche/ubuntu_package_download"
+repository = "https://github.com/canonical/ubuntu-package-download"
+"Changelog" = "https://github.com/philroche/ubuntu_package_download/blob/master/changelog.md"
+"Bugs" = "https://github.com/philroche/ubuntu_package_download/issues"
 
 # Mypy
 # ----
