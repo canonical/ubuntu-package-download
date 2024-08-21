@@ -12,6 +12,7 @@ authors = [
 ]
 maintainers = [
   "Philip Roche <phil.roche@canonical.com>",
+  "Ankush Pathak <ankush.pathak@canonical.com>",
 ]
 readme = "README.rst"
 packages = [
