@@ -221,6 +221,6 @@ def _perform_download(binary_build, binary_publishing_history, launchpad, lp_ser
             with open(binary_build_filename, "wb") as f:
                 f.write(launchpad._browser.get(binary_build_url))
                 print(
-                    f"INFO: \tDownloaded {binary_build_filename} from {lp_series.name} {binary_build.arch_tag} build.")
+                    f"INFO: \tDownloaded {binary_build_filename} from {lp_series.name} {binary_build.arch_tag} build using URL: {binary_build_url}.")
         else:
             print(f"INFO: \t{binary_build_filename} already exists.")
