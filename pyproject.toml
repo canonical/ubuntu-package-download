@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "ubuntu_package_download"
-version = "0.0.7"
+version = "0.0.8"
 description = "Helpful utility to download Ubuntu debian packages"
 license = "GPL-3.0-only"
 authors = [
@@ -41,10 +41,10 @@ watchdog = "^4.0.2"
 ubuntu-package-download = "ubuntu_package_download.cli:app"
 
 [tool.poetry.urls]
-homepage = "https://github.com/philroche/ubuntu_package_download"
+homepage = "https://github.com/canonical/ubuntu-package-download/"
 repository = "https://github.com/canonical/ubuntu-package-download"
-"Changelog" = "https://github.com/philroche/ubuntu_package_download/blob/master/changelog.md"
-"Bugs" = "https://github.com/philroche/ubuntu_package_download/issues"
+Bugs = "https://github.com/canonical/ubuntu-package-download/issues"
+Changelog = "https://github.com/canonical/ubuntu-package-download/blob/main/HISTORY.rst"
 
 # Mypy
 # ----
@@ -62,4 +62,3 @@ warn_no_return = true
 module = "tests.*"
 allow_untyped_defs = true
 disable_error_code = "attr-defined"
-
