@@ -1,0 +1,26 @@
+name: testing
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  tox:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.11", "3.12"]
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install tox and any other packages
+        run: |
+          pip3 install tox
+      - uses: actions/checkout@v4
+      - name: Run tox
+        # Run tox using the version of Python in `PATH`
+        run: tox
