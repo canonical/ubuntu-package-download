@@ -6,9 +6,6 @@ Ubuntu Package Download
 .. image:: https://img.shields.io/pypi/v/ubuntu_package_download.svg
         :target: https://pypi.python.org/pypi/ubuntu_package_download
 
-.. image:: https://img.shields.io/travis/philroche/ubuntu_package_download.svg
-        :target: https://travis-ci.com/philroche/ubuntu_package_download
-
 .. image:: https://readthedocs.org/projects/ubuntu-package-download/badge/?version=latest
         :target: https://ubuntu-package-download.readthedocs.io/en/latest/?version=latest
         :alt: Documentation Status
