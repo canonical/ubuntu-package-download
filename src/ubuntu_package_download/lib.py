@@ -49,14 +49,14 @@ def _get_binary_build(archive, launchpad, lp_arch_series, package_name,
 
 
 def download_deb(
-    package_name, package_version, package_architecture="amd64", series=None, fallback_series=True, fallback_version=False):
+    package_name, package_version, package_architecture="amd64", series=None, fallback_series=True, fallback_version=False, fallback_architecture=True):
     """
     Download a deb from launchpad for a specific package version and architecture
 
     Process/Order of finding the package and fallback logic:
 
     1. Attempt to find the package in the specified series and architecture
-    2. If the package is not found in the specified series and architecture attempt to find the package in the `all` architecture (amd64)
+    2. If the package is not found in the specified series and architecture attempt to find the package in the `all` architecture (amd64) if fallback_architecture flag is set to True
     3. If the package is not found in the `all` architecture attempt to find the package in a previous series if the fallback_series flag is set to True
     4. If the package is not found in a previous series attempt to find the previous version of the package in the same series if the fallback_version flag is set to True
 
@@ -204,11 +204,11 @@ def download_deb(
         # This will be our fallback if we do not find a build for the specified architecture. Typically this is
         # the `all` architecture
         architecture_all_arch_tag = "amd64"
-        if package_architecture != architecture_all_arch_tag:
+        if package_architecture != architecture_all_arch_tag and fallback_architecture:
             print(
                 f"WARNING: \tFALLBACK ARCHITECTURE - Attempting to find and download the {package_name} {architecture_all_arch_tag} version {package_version}..."
             )
-            download_deb(package_name, package_version, package_architecture=architecture_all_arch_tag, series=series, fallback_series=fallback_series, fallback_version=fallback_version)
+            download_deb(package_name, package_version, package_architecture=architecture_all_arch_tag, series=series, fallback_series=fallback_series, fallback_version=fallback_version, fallback_architecture=fallback_architecture)
 
 
 def _perform_download(binary_build, binary_publishing_history, launchpad, lp_series):
