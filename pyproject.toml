@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "ubuntu_package_download"
-version = "0.0.8"
+version = "0.0.9"
 description = "Helpful utility to download Ubuntu debian packages"
 license = "GPL-3.0-only"
 authors = [
