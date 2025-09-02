@@ -1113,17 +1113,20 @@ dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "pygments
 
 [[package]]
 name = "python-debian"
-version = "0.1.49"
-description = "Debian package related modules"
+version = "1.0.1"
+description = "Modules to read and manipulate many file formats related to Debian packages and repositories"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.7"
 files = [
-    {file = "python-debian-0.1.49.tar.gz", hash = "sha256:8cf677a30dbcb4be7a99536c17e11308a827a4d22028dc59a67f6c6dd3f0f58c"},
-    {file = "python_debian-0.1.49-py3-none-any.whl", hash = "sha256:880f3bc52e31599f2a9b432bd7691844286825087fccdcf2f6ffd5cd79a26f9f"},
+    {file = "python-debian-1.0.1.tar.gz", hash = "sha256:3ada9b83a3d671b58081782c0969cffa0102f6ce433fbbc7cf21275b8b5cc771"},
+    {file = "python_debian-1.0.1-py3-none-any.whl", hash = "sha256:8f137c230c1d9279c2ac892b35915068b2aca090c9fd3da5671ff87af32af12c"},
 ]
 
 [package.dependencies]
-chardet = "*"
+charset-normalizer = "*"
+
+[package.extras]
+test = ["pytest", "pytest-cov"]
 
 [[package]]
 name = "pywin32-ctypes"
@@ -1676,4 +1679,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "3c9b486913f9327c0a7cee7b53891b717c135a9c52668ff81655cc1c4fce0aa8"
+content-hash = "283c32ece005ed94c39630377480e79a3abd6169708a7092b7460650c25a4c08"
