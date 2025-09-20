@@ -1546,17 +1546,17 @@ keyring = ["keyring (>=21.2.0)"]
 
 [[package]]
 name = "typer"
-version = "0.17.5"
+version = "0.19.1"
 description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "typer-0.17.5-py3-none-any.whl", hash = "sha256:45f2709d44be2f0d0f8bc70c9f845f60ef69d6cc80c6e6ae2cc2f29bae650cf6"},
-    {file = "typer-0.17.5.tar.gz", hash = "sha256:a6fe2d187feb1b4a10322b910267b6339e4cc98257fae34d22299a47eac704f1"},
+    {file = "typer-0.19.1-py3-none-any.whl", hash = "sha256:914b2b39a1da4bafca5f30637ca26fa622a5bf9f515e5fdc772439f306d5682a"},
+    {file = "typer-0.19.1.tar.gz", hash = "sha256:cb881433a4b15dacc875bb0583d1a61e78497806741f9aba792abcab390c03e6"},
 ]
 
 [package.dependencies]
-click = ">=8.0.0,<8.3.0"
+click = ">=8.0.0"
 rich = ">=10.11.0"
 shellingham = ">=1.3.0"
 typing-extensions = ">=3.7.4.3"
@@ -1686,4 +1686,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "b0d22dfaa4c6a42a1c3d71f161079858b117862b4692ce5ec15b045152fcf123"
+content-hash = "bb5ca4af47cdb095a7c5c44d6a3d0674f8166677c73ae3a4a034d18f6abcbf0f"
