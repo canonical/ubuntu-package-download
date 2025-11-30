@@ -27,7 +27,7 @@ python-debian = "^1.0.0"
 rich = "^13.7.1"
 
 [tool.poetry.group.dev.dependencies]
-sphinx = "^8.0.2"
+sphinx = "^9.0.0"
 bump2version = "^1.0.1"
 coverage = "^7.6.1"
 mypy = "^1.11.1"
