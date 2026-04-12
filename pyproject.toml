@@ -24,7 +24,7 @@ python = "^3.10"
 typer = "^0.24.0"
 launchpadlib = "^2.0.0"
 python-debian = "^1.0.0"
-rich = "^13.7.1"
+rich = "^15.0.0"
 
 [tool.poetry.group.dev.dependencies]
 sphinx = "^8.0.2"
