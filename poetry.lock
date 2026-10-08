@@ -777,19 +777,20 @@ test = ["pyfakefs", "pytest (>=6,!=8.1.*)", "pytest-checkdocs (>=2.4)", "pytest-
 
 [[package]]
 name = "launchpadlib"
-version = "2.1.0"
+version = "2.2.0"
 description = "Script Launchpad through its web services interfaces.  Officially supported."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "launchpadlib-2.1.0-py3-none-any.whl", hash = "sha256:28ae51a8f09deb6506c7f72e47e21d37b28edba2a0d4a1bc7ebecca35168e2ac"},
-    {file = "launchpadlib-2.1.0.tar.gz", hash = "sha256:b4c25890bb75050d54c08123d2733156b78a59a2555f5461f69b0e44cd91242f"},
+    {file = "launchpadlib-2.2.0-py3-none-any.whl", hash = "sha256:43c54ee74b64a6a99e485ffea52c7e695c549daf8babe4ae37c8c0edcb4f2e24"},
+    {file = "launchpadlib-2.2.0.tar.gz", hash = "sha256:d4f7bb6b95739d4667dd6093d410220317b2415b6c2ef5b143379ebc5f5363a9"},
 ]
 
 [package.dependencies]
 httplib2 = "*"
 "lazr.restfulclient" = ">=0.14.2"
 "lazr.uri" = "*"
+pysocks = "*"
 
 [package.extras]
 docs = ["Sphinx"]
@@ -1340,6 +1341,18 @@ tomli = {version = ">=2.3", markers = "python_version < \"3.11\""}
 [package.extras]
 docs = ["furo (>=2025.9.25)", "sphinx-autodoc-typehints (>=3.5.1)"]
 testing = ["covdefaults (>=2.3)", "pytest (>=8.4.2)", "pytest-cov (>=7)", "pytest-mock (>=3.15.1)", "setuptools (>=80.9)"]
+
+[[package]]
+name = "pysocks"
+version = "1.7.1"
+description = "A Python SOCKS client module. See https://github.com/Anorov/PySocks for more information."
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+files = [
+    {file = "PySocks-1.7.1-py27-none-any.whl", hash = "sha256:08e69f092cc6dbe92a0fdd16eeb9b9ffbc13cadfe5ca4c7bd92ffb078b293299"},
+    {file = "PySocks-1.7.1-py3-none-any.whl", hash = "sha256:2725bd0a9925919b9b51739eea5f9e2bae91e83288108a9ad338b2e3a4435ee5"},
+    {file = "PySocks-1.7.1.tar.gz", hash = "sha256:3f8804571ebe159c380ac6de37643bb4685970655d3bba243530d6558b799aa0"},
+]
 
 [[package]]
 name = "pytest"
