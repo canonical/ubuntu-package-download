@@ -777,13 +777,13 @@ test = ["pyfakefs", "pytest (>=6,!=8.1.*)", "pytest-checkdocs (>=2.4)", "pytest-
 
 [[package]]
 name = "launchpadlib"
-version = "2.2.0"
+version = "2.3.0"
 description = "Script Launchpad through its web services interfaces.  Officially supported."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "launchpadlib-2.2.0-py3-none-any.whl", hash = "sha256:43c54ee74b64a6a99e485ffea52c7e695c549daf8babe4ae37c8c0edcb4f2e24"},
-    {file = "launchpadlib-2.2.0.tar.gz", hash = "sha256:d4f7bb6b95739d4667dd6093d410220317b2415b6c2ef5b143379ebc5f5363a9"},
+    {file = "launchpadlib-2.3.0-py3-none-any.whl", hash = "sha256:791be79172a26053f0faa0a977275faea22883609fbdaaee2d617d7e14804bed"},
+    {file = "launchpadlib-2.3.0.tar.gz", hash = "sha256:a39261632baa060872f65fe149a8acd6e1ada55964ee1afc9f25915e3b95e68b"},
 ]
 
 [package.dependencies]
@@ -794,8 +794,9 @@ pysocks = "*"
 
 [package.extras]
 docs = ["Sphinx"]
+fido2 = ["fido2 (>=1.1.2,<3)"]
 keyring = ["keyring"]
-test = ["coverage", "pytest"]
+test = ["coverage", "fido2 (>=1.1.2,<3)", "pytest"]
 testing = ["testresources", "wadllib"]
 
 [[package]]
