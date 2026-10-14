@@ -34,6 +34,12 @@ def main(
         Annotated[bool, typer.Option(help="If the exact version cannot be found should we download the next version?")] = False,
     fallback_architecture:
         Annotated[bool, typer.Option(help="If the exact architecture cannot be found should we fallback to the default architecture?")] = True,
+    ppa:
+        Annotated[str, typer.Option(help="The PPA to download the package from eg. 'ppa:owner/name'. If not specified the Ubuntu main archive is used.")] = None,
+    lp_user:
+        Annotated[str, typer.Option(help="The Launchpad user to authenticate as. Required for private PPAs. If not specified anonymous access is used.")] = None,
+    lp_credentials_store:
+        Annotated[str, typer.Option(help="Path to the Launchpad credentials file. Defaults to ~/.launchpad.credentials (or $SNAP_USER_COMMON/.launchpad.credentials).")] = None,
     ):
     """Console script for ubuntu_package_download."""
     console.print(f"Package name is {package_name}")
@@ -44,11 +50,13 @@ def main(
     console.print(f"Fallback series is {fallback_series}")
     console.print(f"Fallback version is {fallback_version}")
     console.print(f"Fallback architecture is {fallback_architecture}")
+    console.print(f"PPA is {ppa}")
+    console.print(f"Launchpad user is {lp_user}")
 
     level = logging.getLevelName(logging_level)
     logging.basicConfig(level=level, stream=sys.stderr, format="%(asctime)s [%(levelname)s] %(message)s")
 
-    download_deb(package_name, package_version, package_architecture, series, fallback_series, fallback_version, fallback_architecture)
+    download_deb(package_name, package_version, package_architecture, series, fallback_series, fallback_version, fallback_architecture, ppa, lp_user, lp_credentials_store)
 
 
 if __name__ == "__main__":
