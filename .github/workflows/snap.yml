@@ -1,0 +1,64 @@
+name: Snap Build and Publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-24.04
+    outputs:
+      snap-file: ${{ steps.build-snap.outputs.snap }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        name: Checkout
+
+      - uses: snapcore/action-build@3bdaa03e1ba6bf59a65f84a751d943d549a54e79 # v1.3.0
+        name: Build snap
+        id: build-snap
+        continue-on-error: true # So we can inspect logs even if this fails
+
+      - name: Upload snapcraft logs
+        if: steps.build-snap.outcome != 'success'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: snapcraft-logs
+          path: |
+            /home/runner/.cache/snapcraft/log/
+            /home/runner/.local/state/snapcraft/log/
+
+      - name: Fail early if snapcraft failed
+        if: steps.build-snap.outcome != 'success'
+        run: exit 1
+
+      - name: Install the built snap
+        run: sudo snap install --dangerous ${{ steps.build-snap.outputs.snap }}
+
+      - name: Check basic functionality
+        run: |
+          set -eux
+          ubuntu-package-download --help
+          # Strict confinement only allows writing under $HOME
+          cd "$(mktemp -d "$HOME/smoke.XXXXXX")"
+          ubuntu-package-download --package-name hello --package-version 2.10-3 --series noble
+          ls hello_2.10-3_*.deb
+
+      - name: Save built snap
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: generated-snap
+          path: ${{ steps.build-snap.outputs.snap }}
+
+      - name: Publish snap to Snap Store
+        uses: snapcore/action-publish@214b86e5ca036ead1668c79afb81e550e6c54d40 # v1.2.0
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+        with:
+          snap: ${{ steps.build-snap.outputs.snap }}
+          release: edge

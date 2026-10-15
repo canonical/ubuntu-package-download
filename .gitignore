@@ -108,3 +108,9 @@ ENV/
 .vscode/
 .idea/
 
+
+# Snap build artifacts
+*.snap
+parts/
+stage/
+prime/
