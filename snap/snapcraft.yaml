@@ -1,0 +1,40 @@
+name: ubuntu-package-download
+summary: Helpful utility to download Ubuntu debian packages
+description: |
+  ubuntu-package-download downloads a specific version of an Ubuntu binary
+  package (.deb) from Launchpad, with optional fallback to earlier Ubuntu
+  series, the next available version, or a different architecture.
+
+  Packages are downloaded into the current working directory, which must be
+  inside your home directory when using the strictly confined snap.
+license: GPL-3.0-only
+website: https://github.com/canonical/ubuntu-package-download
+source-code: https://github.com/canonical/ubuntu-package-download
+issues: https://github.com/canonical/ubuntu-package-download/issues
+adopt-info: ubuntu-package-download
+base: core24
+grade: stable
+confinement: strict
+
+platforms:
+  amd64:
+
+apps:
+  ubuntu-package-download:
+    command: bin/ubuntu-package-download
+    environment:
+      PYTHONUNBUFFERED: "1"
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+    plugs:
+      - network
+      - home
+
+parts:
+  ubuntu-package-download:
+    plugin: python
+    source: .
+    override-pull: |
+      craftctl default
+      version="$(grep -m1 -E '^version\s*=' pyproject.toml | sed -E 's/^version\s*=\s*"([^"]+)".*/\1/')"
+      craftctl set version="${version}"
