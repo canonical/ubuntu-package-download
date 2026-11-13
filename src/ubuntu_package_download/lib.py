@@ -5,6 +5,7 @@ import functools
 import os
 
 from debian import debian_support
+from launchpadlib.credentials import UnencryptedFileCredentialStore
 from launchpadlib.launchpad import Launchpad
 from launchpadlib.uris import service_roots
 
@@ -49,7 +50,7 @@ def _get_binary_build(archive, launchpad, lp_arch_series, package_name,
 
 
 def download_deb(
-    package_name, package_version, package_architecture="amd64", series=None, fallback_series=True, fallback_version=False, fallback_architecture=True):
+    package_name, package_version, package_architecture="amd64", series=None, fallback_series=True, fallback_version=False, fallback_architecture=True, ppa=None, lp_user=None, lp_credentials_store=None):
     """
     Download a deb from launchpad for a specific package version and architecture
 
@@ -65,14 +66,30 @@ def download_deb(
     if f":{package_architecture}" in package_name:
         # strip the architecture from the package name if it is present
         package_name = package_name.replace(f":{package_architecture}", "")
-    # Log in to launchpad annonymously - we use launchpad to find
-    # the package publish time
-    launchpad = Launchpad.login_anonymously(
-        "ubuntu-package-download", service_root=service_roots["production"], version="devel"
-    )
+    # Log in to launchpad - we use launchpad to find
+    # the package publish time. Anonymous access is used unless lp_user
+    # is specified (required for private PPAs).
+    if lp_user:
+        if not lp_credentials_store:
+            creds_prefix = os.environ.get("SNAP_USER_COMMON", os.path.expanduser("~"))
+            lp_credentials_store = os.path.join(creds_prefix, ".launchpad.credentials")
+        store = UnencryptedFileCredentialStore(lp_credentials_store)
+        launchpad = Launchpad.login_with(
+            lp_user,
+            credential_store=store,
+            service_root=service_roots["production"], version="devel"
+        )
+    else:
+        launchpad = Launchpad.login_anonymously(
+            "ubuntu-package-download", service_root=service_roots["production"], version="devel"
+        )
 
     ubuntu = launchpad.distributions["ubuntu"]
     archive = ubuntu.main_archive
+    if ppa:
+        ppa_owner_and_name = ppa.replace("ppa:", "")
+        ppa_owner, ppa_name = ppa_owner_and_name.split("/")
+        archive = launchpad.people[ppa_owner].getPPAByName(name=ppa_name)
     lp_series = ubuntu.getSeries(name_or_version=series)
     # For the package we care about none in `main` that I have found were built prior to 14.04 so we
     # can use this as a cut off point
@@ -208,7 +225,7 @@ def download_deb(
             print(
                 f"WARNING: \tFALLBACK ARCHITECTURE - Attempting to find and download the {package_name} {architecture_all_arch_tag} version {package_version}..."
             )
-            download_deb(package_name, package_version, package_architecture=architecture_all_arch_tag, series=series, fallback_series=fallback_series, fallback_version=fallback_version, fallback_architecture=fallback_architecture)
+            download_deb(package_name, package_version, package_architecture=architecture_all_arch_tag, series=series, fallback_series=fallback_series, fallback_version=fallback_version, fallback_architecture=fallback_architecture, ppa=ppa, lp_user=lp_user, lp_credentials_store=lp_credentials_store)
 
 
 def _perform_download(binary_build, binary_publishing_history, launchpad, lp_series):
